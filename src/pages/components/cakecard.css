@@ -1,0 +1,39 @@
+import React, { useState } from 'react';
+import CakeCard from '../components/CakeCard';  // Import CakeCard component
+
+const Home = () => {
+  const [cart, setCart] = useState([]);  // This will store the cakes added to the cart
+
+  const cakes = [
+    { id: 1, name: 'Chocolate Cake', price: 20, image: 'path/to/chocolate-cake.jpg' },
+    { id: 2, name: 'Strawberry Cake', price: 18, image: 'path/to/strawberry-cake.jpg' },
+    { id: 3, name: 'Vanilla Cake', price: 22, image: 'path/to/vanilla-cake.jpg' },
+  ];
+
+  // Function to handle adding cakes to the cart
+  const handleAddToCart = (cake) => {
+    setCart([...cart, cake]);  // Add the cake to the cart
+  };
+
+  return (
+    <div className="home">
+      <h2>Featured Cakes</h2>
+      <div className="cake-list">
+        {cakes.map((cake) => (
+          <CakeCard key={cake.id} cake={cake} onAddToCart={handleAddToCart} />
+        ))}
+      </div>
+
+      <div className="cart">
+        <h3>Your Cart</h3>
+        <ul>
+          {cart.map((item, index) => (
+            <li key={index}>{item.name}</li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
+};
+
+export default Home;
